@@ -1,5 +1,7 @@
 package com.yussef.notes.models;
 
+import androidx.annotation.NonNull;
+
 public class Note {
 
     private String title;
@@ -37,5 +39,14 @@ public class Note {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                '}';
     }
 }
