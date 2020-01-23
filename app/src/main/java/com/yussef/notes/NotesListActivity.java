@@ -1,17 +1,16 @@
 package com.yussef.notes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
-
 import com.yussef.notes.adapters.NotesRecyclerAdapter;
 import com.yussef.notes.models.Note;
 import com.yussef.notes.util.VerticalSpacingItemDecorator;
-
 import java.util.ArrayList;
 
 public class NotesListActivity extends AppCompatActivity {
@@ -33,6 +32,8 @@ public class NotesListActivity extends AppCompatActivity {
 
         initRecyclerView();
         insertFakeNotes();
+        setSupportActionBar((Toolbar)findViewById(R.id.notes_toolbar));
+        setTitle("Notes");
     }
 
     private void insertFakeNotes(){
@@ -53,5 +54,4 @@ public class NotesListActivity extends AppCompatActivity {
         mNoteRecyclerAdapter = new NotesRecyclerAdapter(mNotes);
         mRecyclerView.setAdapter(mNoteRecyclerAdapter);
     }
-
 }

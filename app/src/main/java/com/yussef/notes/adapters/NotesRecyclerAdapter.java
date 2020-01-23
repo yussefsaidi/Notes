@@ -53,5 +53,4 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
             timestamp = itemView.findViewById(R.id.note_timestamp);
         }
     }
-
 }
