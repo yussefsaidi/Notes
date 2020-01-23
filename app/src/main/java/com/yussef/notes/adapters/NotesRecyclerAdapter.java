@@ -39,6 +39,10 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
         return mNotes.size();
     }
 
+
+    /**
+     * ViewHolder contains View information to display one item from our list layout
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView title, timestamp;
@@ -49,4 +53,5 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NotesRecyclerAdap
             timestamp = itemView.findViewById(R.id.note_timestamp);
         }
     }
+
 }
