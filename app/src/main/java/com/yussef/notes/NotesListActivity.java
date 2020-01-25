@@ -13,13 +13,11 @@ import com.yussef.notes.models.Note;
 import com.yussef.notes.util.VerticalSpacingItemDecorator;
 import java.util.ArrayList;
 
-public class NotesListActivity extends AppCompatActivity {
+public class NotesListActivity extends AppCompatActivity implements NotesRecyclerAdapter.OnNoteListener {
 
     private static final String TAG = "NotesListActivity";
-
     // UI components
     private RecyclerView  mRecyclerView;
-
     // Vars
     private ArrayList<Note> mNotes = new ArrayList<>();
     private NotesRecyclerAdapter mNoteRecyclerAdapter;
@@ -32,6 +30,8 @@ public class NotesListActivity extends AppCompatActivity {
 
         initRecyclerView();
         insertFakeNotes();
+
+        // Set toolbar and set title
         setSupportActionBar((Toolbar)findViewById(R.id.notes_toolbar));
         setTitle("Notes");
     }
@@ -51,7 +51,12 @@ public class NotesListActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
         mRecyclerView.addItemDecoration(itemDecorator);
-        mNoteRecyclerAdapter = new NotesRecyclerAdapter(mNotes);
+        mNoteRecyclerAdapter = new NotesRecyclerAdapter(mNotes, this);
         mRecyclerView.setAdapter(mNoteRecyclerAdapter);
+    }
+
+    @Override
+    public void onNoteClick(int position) {
+        Log.d(TAG, "onNoteClick: Clicked " + position);
     }
 }
