@@ -15,8 +15,10 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/notes_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:background="?attr/colorPrimary">
+
+            <include layout="@layout/layout_note_toolbar"/>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
