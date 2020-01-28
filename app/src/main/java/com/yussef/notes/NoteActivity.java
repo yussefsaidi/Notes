@@ -88,8 +88,12 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
     private boolean getIncomingIntent(){
         if(getIntent().hasExtra("selected_note")){
             mInitialNote = getIntent().getParcelableExtra("selected_note");
-            mFinalNote = getIntent().getParcelableExtra("selected_note");
-           // Log.d(TAG, "getIncomingIntent: " + mInitialNote.toString());
+            mFinalNote = new Note();
+            mFinalNote.setTitle(mInitialNote.getTitle());
+            mFinalNote.setContent(mInitialNote.getContent());
+            mFinalNote.setTimestamp(mInitialNote.getTimestamp());
+            mFinalNote.setId(mInitialNote.getId());
+
             mMode = EDIT_MODE_DISABLED;
             mIsNewNote = false;
             return false;
@@ -103,8 +107,12 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
         if(mIsNewNote){
             saveNewNote();
         } else{
-
+            updateNote();
         }
+    }
+
+    private void updateNote(){
+        mNoteRepository.updateNote(mFinalNote);
     }
 
     private void saveNewNote(){
@@ -151,17 +159,20 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
         hideSoftKeyboard();
         disableContentInteraction();
 
-        String temp = mLinedEditText.getText().toString();
-        temp = temp.replace("\n", "");
-        temp = temp.replace(" ", "");
-        if(temp.length() > 0){
+        String tempContent = mLinedEditText.getText().toString();
+        String tempTitle = mEditTitle.getText().toString();
+        tempContent = tempContent.replace("\n", "");
+        tempContent = tempContent.replace(" ", "");
+        if(tempContent.length() > 0){
+            Log.d(TAG, "disableEditMode: Final Note is edited");
             mFinalNote.setTitle(mEditTitle.getText().toString());
             mFinalNote.setContent(mLinedEditText.getText().toString());
             String timestamp = Utility.getCurrentTimestamp();
             mFinalNote.setTimestamp(timestamp);
 
-            if(!mFinalNote.getContent().equals(mInitialNote.getContent())
-                    || mFinalNote.getTitle().equals(mInitialNote.getTitle())){
+            if((mFinalNote.getContent()!=(mInitialNote.getContent()))
+                    || (mFinalNote.getTitle()!=(mInitialNote.getTitle()))){
+                Log.d(TAG, "disableEditMode: Changes are saved");
                 saveChanges();
             }
         }
