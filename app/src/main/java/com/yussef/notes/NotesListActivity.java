@@ -3,6 +3,7 @@ package com.yussef.notes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +16,10 @@ import android.widget.LinearLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yussef.notes.adapters.NotesRecyclerAdapter;
 import com.yussef.notes.models.Note;
+import com.yussef.notes.persistence.NoteRepository;
 import com.yussef.notes.util.VerticalSpacingItemDecorator;
 import java.util.ArrayList;
+import java.util.List;
 
 public class NotesListActivity extends AppCompatActivity implements
         NotesRecyclerAdapter.OnNoteListener, FloatingActionButton.OnClickListener {
@@ -29,21 +32,38 @@ public class NotesListActivity extends AppCompatActivity implements
     // Vars
     private ArrayList<Note> mNotes = new ArrayList<>();
     private NotesRecyclerAdapter mNoteRecyclerAdapter;
+    private NoteRepository mNoteRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_list);
         mRecyclerView = findViewById(R.id.recyclerView);
-
         findViewById(R.id.fab).setOnClickListener(this);
+        mNoteRepository = new NoteRepository(this);
 
         initRecyclerView();
         insertFakeNotes();
+        retrieveNotes();
 
         // Set toolbar and set title
         setSupportActionBar((Toolbar)findViewById(R.id.notes_toolbar));
         setTitle("Notes");
+    }
+
+    private void retrieveNotes(){
+        mNoteRepository.retrieveNotesTask().observe(this, new Observer<List<Note>>() {
+            @Override
+            public void onChanged(List<Note> notes) {
+                if(mNotes.size() > 0){
+                    mNotes.clear();
+                }
+                if(notes != null){
+                    mNotes.addAll(notes);
+                }
+                mNoteRecyclerAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void insertFakeNotes(){
