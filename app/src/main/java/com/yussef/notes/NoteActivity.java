@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.yussef.notes.models.Note;
 import com.yussef.notes.persistence.NoteRepository;
+import com.yussef.notes.util.Utility;
 
 public class NoteActivity extends AppCompatActivity implements View.OnTouchListener,
         GestureDetector.OnGestureListener,
@@ -156,7 +157,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnTouchListe
         if(temp.length() > 0){
             mFinalNote.setTitle(mEditTitle.getText().toString());
             mFinalNote.setContent(mLinedEditText.getText().toString());
-            String timestamp = "Jan 2020";
+            String timestamp = Utility.getCurrentTimestamp();
             mFinalNote.setTimestamp(timestamp);
 
             if(!mFinalNote.getContent().equals(mInitialNote.getContent())
