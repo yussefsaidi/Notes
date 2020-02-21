@@ -13,18 +13,13 @@ Git clone the repository, import project in Android Studio, and run on an androi
 
 ## Architecture Overview
 This application makes use of the MVVM architectural pattern. 
-Our project follows: Activity -> ViewModel -> Repository -> Remote Data Source -> Retrofit -> Webservice.
-LiveData is retrieved from the Remote Data Source into our repository, then it trickles down all the way to our ViewModel. The activities do not hold data.
-
-TO DO: Adding a local database cache using Room Persistence Library.
+Our project follows: Activity -> ViewModel -> Repository -> Room -> Local Database Cache
 
 ## External Dependencies
-
 - [Room](https://developer.android.com/topic/libraries/architecture/room)
 : Local data storage for our notes.
 
 ## Tests
-
 Test: Swipe a note to the right to delete it.
 Test: Press on the Floating Action Button to add a new note and enter edit mode.
 Test: Fill out the note information (title and information), and press the checkmark.
