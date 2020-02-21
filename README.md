@@ -20,11 +20,11 @@ Our project follows: Activity -> ViewModel -> Repository -> Room -> Local Databa
 : Local data storage for our notes.
 
 ## Tests
-Test: Swipe a note to the right to delete it.
-Test: Press on the Floating Action Button to add a new note and enter edit mode.
-Test: Fill out the note information (title and information), and press the checkmark.
-Test: Open and view a note by clicking on it.
-Test: Edit a note either by double clicking the body, or by single clicking the title.
+Test: Swipe a note to the right to delete it. </br>
+Test: Press on the Floating Action Button to add a new note and enter edit mode. </br>
+Test: Fill out the note information (title and information), and press the checkmark. </br>
+Test: Open and view a note by clicking on it. </br>
+Test: Edit a note either by double clicking the body, or by single clicking the title. </br>
 
 ## License
 © [Yussef Saidi](https://yussefsaidi.me/)
